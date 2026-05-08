@@ -786,11 +786,17 @@ reasons.forEach((reason,index)=>{
     text.innerText = reason;
 
     const angle =
-    (index/reasons.length) *
-    Math.PI * 2;
+(index/reasons.length) *
+Math.PI * 12;
 
-    const radius =
-    450 + (index%4)*180;
+const spiral =
+index * 18;
+
+const randomOffset =
+(Math.random() * 120) - 60;
+
+const radius =
+250 + spiral + randomOffset;
 
     const x =
     Math.cos(angle)*radius;
