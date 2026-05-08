@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Porque eres tú ✨</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    background:black;
+    font-family:'Poppins',sans-serif;
+    color:white;
+}
+
+/* ========================================= */
+/* FONDO ESTRELLADO */
+/* ========================================= */
+
+#universe{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    background:
+    radial-gradient(circle at center,
+    #14001f 0%,
+    #090014 40%,
+    #000000 100%);
+}
+
+/* Estrellas */
+
+.star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    opacity:0.8;
+    animation: twinkle linear infinite;
+}
+
+@keyframes twinkle{
+    0%{
+        opacity:0.2;
+        transform:scale(0.8);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.2);
+    }
+    100%{
+        opacity:0.2;
+        transform:scale(0.8);
+    }
+}
+
+/* Estrellas fugaces */
+
+.shooting-star{
+    position:absolute;
+    width:2px;
+    height:120px;
+    background:linear-gradient(white,transparent);
+    transform:rotate(45deg);
+    opacity:0;
+    animation:shoot 5s linear infinite;
+}
+
+@keyframes shoot{
+    0%{
+        opacity:0;
+        top:-10%;
+        left:110%;
+    }
+    10%{
+        opacity:1;
+    }
+    30%{
+        top:120%;
+        left:-10%;
+        opacity:0;
+    }
+    100%{
+        opacity:0;
+    }
+}
+
+/* ========================================= */
+/* PANTALLA INICIAL */
+/* ========================================= */
+
+#welcome-screen{
+    position:absolute;
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:30px;
+    z-index:5;
+    transition:all 2s ease;
+}
+
+.title{
+    font-family:'Caveat',cursive;
+    font-size:3rem;
+    margin-bottom:20px;
+    color:#ffd9ff;
+    text-shadow:
+    0 0 10px #ff8dfd,
+    0 0 20px #ff8dfd;
+}
+
+.subtitle{
+    font-size:1rem;
+    max-width:700px;
+    line-height:1.8;
+    color:#f1dfff;
+    margin-bottom:30px;
+}
+
+#counter{
+    font-size:1.2rem;
+    margin-top:10px;
+    margin-bottom:30px;
+    color:#fff;
+    text-shadow:0 0 10px white;
+}
+
+button{
+    padding:15px 35px;
+    border:none;
+    border-radius:40px;
+    background:rgba(255,255,255,0.1);
+    color:white;
+    font-size:1rem;
+    backdrop-filter:blur(10px);
+    cursor:pointer;
+    transition:0.4s;
+    border:1px solid rgba(255,255,255,0.2);
+    box-shadow:0 0 15px rgba(255,255,255,0.2);
+}
+
+button:hover{
+    transform:scale(1.08);
+    box-shadow:
+    0 0 20px #ffb3ff,
+    0 0 40px #ff8dfd;
+}
+
+/* ========================================= */
+/* GALAXIA */
+/* ========================================= */
+
+#galaxy{
+    position:absolute;
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transform:scale(0.2);
+    opacity:0;
+    transition:all 4s ease;
+}
+
+/* Activar transición */
+
+#galaxy.active{
+    transform:scale(1);
+    opacity:1;
+}
+
+#welcome-screen.hide{
+    opacity:0;
+    transform:scale(1.5);
+    filter:blur(20px);
+}
+
+/* Núcleo */
+
+.core{
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:
+    radial-gradient(circle,
+    #ffd6ff 0%,
+    #ff8dfd 40%,
+    #7b2fff 100%);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    box-shadow:
+    0 0 60px #ff8dfd,
+    0 0 120px #7b2fff;
+
+    animation:pulse 5s ease-in-out infinite;
+}
+
+@keyframes pulse{
+    0%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.05);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+
+.core-text{
+    font-family:'Caveat',cursive;
+    font-size:2.4rem;
+    color:white;
+    padding:20px;
+}
+
+/* Razones */
+
+.reason{
+    position:absolute;
+    color:white;
+    font-size:0.9rem;
+    white-space:nowrap;
+    text-shadow:0 0 10px white;
+    animation:float 6s ease-in-out infinite;
+    opacity:0.85;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="universe">
+
+    <!-- Estrellas -->
+    <div id="stars"></div>
+
+    <!-- Pantalla inicial -->
+    <div id="welcome-screen">
+
+        <div class="title">
+            Hemos estado juntos durante...
+        </div>
+
+        <div id="counter"></div>
+
+        <div class="subtitle">
+            Y esto es lo que he aprendido y me enamora de ti ✨
+        </div>
+
+        <button onclick="enterGalaxy()">
+            Mírate a través de mis ojos
+        </button>
+
+    </div>
+
+    <!-- Galaxia -->
+    <div id="galaxy">
+
+        <div class="core">
+            <div class="core-text">
+                Porque eres tú
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* ========================================= */
+/* CONTADOR */
+/* ========================================= */
+
+const startDate = new Date("December 8, 2024 00:00:00");
+
+function updateCounter(){
+
+    const now = new Date();
+
+    const diff = now - startDate;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("counter").innerHTML =
+    `${days} días ${hours} horas ${minutes} minutos ${seconds} segundos`;
+}
+
+setInterval(updateCounter,1000);
+
+/* ========================================= */
+/* CREAR ESTRELLAS */
+/* ========================================= */
+
+const starsContainer = document.getElementById("stars");
+
+for(let i=0;i<250;i++){
+
+    const star = document.createElement("div");
+
+    star.classList.add("star");
+
+    const size = Math.random()*3;
+
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+
+    star.style.top = Math.random()*100 + "%";
+    star.style.left = Math.random()*100 + "%";
+
+    star.style.animationDuration =
+    (2 + Math.random()*5) + "s";
+
+    starsContainer.appendChild(star);
+}
+
+/* ========================================= */
+/* ESTRELLAS FUGACES */
+/* ========================================= */
+
+for(let i=0;i<4;i++){
+
+    const shooting = document.createElement("div");
+
+    shooting.classList.add("shooting-star");
+
+    shooting.style.animationDelay =
+    (Math.random()*10) + "s";
+
+    starsContainer.appendChild(shooting);
+}
+
+/* ========================================= */
+/* ENTRAR A GALAXIA */
+/* ========================================= */
+
+function enterGalaxy(){
+
+    document.getElementById("welcome-screen")
+    .classList.add("hide");
+
+    document.getElementById("galaxy")
+    .classList.add("active");
+}
+
+/* ========================================= */
+/* RAZONES */
+/* ========================================= */
+
+const reasons = [
+
+"Tus ojos no saben mentirme",
+"Tu corazón habla con fuerza",
+"Esos pequeños destellos en tus ojitos",
+"La magnitud del sentir de tu corazón",
+"Tu sonrisa tan amplia y hermosa",
+"Cómo abrazas mi alma",
+"Cómo besas mi ser",
+"Tu necesidad de sentirme contigo",
+"La manera en que me dices que me amas",
+"Tu pequeña torpeza cuando te pones nerviosa",
+"Tu determinación para nuestro futuro",
+"Tu gran fe",
+"Tu devoción a Dios",
+"La manera particular en que ves el mundo",
+"Cómo haces latir mi corazón",
+"Cómo conviertes distancia en cercanía",
+"Cómo tocas mi corazón de maneras inusuales",
+"Cómo me impulsas a ser mejor",
+"La manera en que me miras",
+"La emoción que sentimos al tocarnos"
+
+];
+
+const galaxy = document.getElementById("galaxy");
+
+reasons.forEach(reason=>{
+
+    const text = document.createElement("div");
+
+    text.classList.add("reason");
+
+    text.innerText = reason;
+
+    const angle = Math.random()*360;
+
+    const radius = 180 + Math.random()*350;
+
+    const x = Math.cos(angle) * radius;
+
+    const y = Math.sin(angle) * radius;
+
+    text.style.left = `calc(50% + ${x}px)`;
+    text.style.top = `calc(50% + ${y}px)`;
+
+    text.style.animationDelay =
+    (Math.random()*5)+"s";
+
+    galaxy.appendChild(text);
+
+});
+
+</script>
+
+</body>
+</html>
